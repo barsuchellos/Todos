@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;1,300&display=swap');
+
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #313030;
+    font-family: 'Raleway', sans-serif;
+    width: 50%;
+    margin: auto;
+    border: 10px solid;
+    border-color: #6e3bc2 ;
+    min-width: 700px;
+    max-width: 1000px;
+
+    margin-top: 50px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    
+}
+

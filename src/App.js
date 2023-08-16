@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import './styles/App.scss'
+import MyInput from './components/MyInput/MyInput';
+import MyButton from './components/MyButton/MyButton';
+import Mylist from './components/MyList/Mylist';
+
+import { useState } from 'react';
+
 
 function App() {
+
+  const [inputValue, setInputValue] = useState('')
+  const [list, setList] = useState([]);
+
+
+  const handleInput = (event) => {
+    setInputValue(() => event)
+  }
+
+  const addToDo = () => {
+    setList(prev => [...prev, inputValue])
+  }
+
+  const enterPress = (event) => {
+    if (event.key === 'Enter') {
+      addToDo()
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='container'>
+        <MyInput task='Task' setArr={handleInput} onKeyPress={enterPress}/>
+        <MyButton addToDo={addToDo}/>
+      </div>
+      <Mylist className='list' list={list}></Mylist>
     </div>
   );
 }

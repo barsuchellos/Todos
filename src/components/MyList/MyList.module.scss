@@ -1,0 +1,19 @@
+
+.list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+
+    &Item {
+        border: 2px solid;
+        border-color: #6e3bc2;
+        color: #6e3bc2;
+        font-size: 25px;
+        margin: 10px;
+        padding: 10px;
+
+        background-color: #2b2436;
+    }
+}
