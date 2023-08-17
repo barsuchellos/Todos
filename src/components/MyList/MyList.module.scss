@@ -6,12 +6,21 @@
     align-items: flex-start;
     padding: 10px;
 
+
+    &ItemContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        width: 600px;
+    }
+
     &Item {
         border: 2px solid;
         border-color: #6e3bc2;
         color: #6e3bc2;
         font-size: 25px;
-        margin: 10px;
+        margin: 20px;
         padding: 10px;
 
         background-color: #2b2436;

@@ -27,7 +27,7 @@ class MyInput extends Component {
                     onChange={this.setValue}
                     value={this.state.inputValue}
                     onKeyPress={this.props.onKeyPress}
-                />
+                />    
             </div>
         );
     }

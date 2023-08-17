@@ -12,7 +12,6 @@ class App extends Component {
       inputValue: '',
       list: [],
     }
-    console.log('inputValue', this.state.inputValue);
   }
 
   handleInput = (event) => {
@@ -32,15 +31,19 @@ class App extends Component {
     }
   }
 
+  updateList = (newList) => {
+    this.setState({list:newList})
+  }
+
   render() {
     const { list } = this.state;
     return (
       <div className="App">
         <div className='container'>
           <MyInput task='Task' setArr={this.handleInput} onKeyPress={this.enterPress} />
-          <MyButton addToDo={this.addToDo} />
+          <MyButton addToDo={this.addToDo} name='Add' />
         </div>
-        <Mylist className='list' list={list}></Mylist>
+        <Mylist className='list' list={list} updateList={this.updateList} ></Mylist>
       </div>
     );
   }
