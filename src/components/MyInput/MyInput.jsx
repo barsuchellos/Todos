@@ -10,9 +10,9 @@ class MyInput extends Component {
 
         this.setValue = this.setValue.bind(this);
     }
-    
+
     setValue(val) {
-        this.setState({inputValue: val.target.value})
+        this.setState({ inputValue: val.target.value })
         this.props.setArr(val.target.value)
     }
 
