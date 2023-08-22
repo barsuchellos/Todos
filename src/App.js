@@ -14,15 +14,19 @@ class App extends Component {
     }
   }
 
+
   handleInput = (event) => {
     this.setState({ inputValue: event })
   }
+
 
   addToDo = () => {
     this.setState((prevState) => ({
       list: [...prevState.list, prevState.inputValue],
       inputValue: '',
+
     }))
+  
   }
 
   enterPress = (event) => {
@@ -32,18 +36,24 @@ class App extends Component {
   }
 
   updateList = (newList) => {
-    this.setState({list:newList})
+    this.setState({ list: newList })
   }
 
   render() {
+    console.log(this.state.inputValue);
     const { list } = this.state;
     return (
       <div className="App">
         <div className='container'>
-          <MyInput task='Task' setArr={this.handleInput} onKeyPress={this.enterPress} />
+          <MyInput
+            task='Task'
+            setArr={this.handleInput}
+            onKeyPress={this.enterPress}
+            inputValue={this.state.inputValue}
+          />
           <MyButton addToDo={this.addToDo} name='Add' />
         </div>
-        <Mylist className='list' list={list} updateList={this.updateList} ></Mylist>
+        <Mylist className='list' list={list} updateList={this.updateList}></Mylist>
       </div>
     );
   }

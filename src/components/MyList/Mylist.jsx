@@ -4,17 +4,18 @@ import MyButton from '../MyButton/MyButton';
 
 class Mylist extends Component {
     deleteItem = (index) => {
-        const newList = this.props.list.filter((el, i) => i !== index)
+        const newList = this.props.list.filter((_, i) => i !== index)
         this.props.updateList(newList);
     }
 
     render() {
+        const { list } = this.props;
         return (
             <ul className={styles.list}>
-                {this.props.list.map((el, index) =>
+                {list.map((el, index) =>
                     <div className={styles.listItemContainer}>
                         <li className={styles.listItem} key={index}>{el}</li>
-                        <MyButton name='Delete' addToDo={() => this.deleteItem(index)} key={index+1}/>
+                        <MyButton name='Delete' addToDo={() => this.deleteItem(index)} key={index + 1} />
                     </div>
                 )}
             </ul>

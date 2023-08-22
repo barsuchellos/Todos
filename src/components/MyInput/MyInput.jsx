@@ -11,26 +11,27 @@ class MyInput extends Component {
         this.setValue = this.setValue.bind(this);
     }
 
-    setValue(val) {
-        this.setState({ inputValue: val.target.value })
-        this.props.setArr(val.target.value)
+    setValue(e) {
+        this.setState({ inputValue: e.target.value });
+        this.props.setArr(e.target.value);
     }
+        render() {
+            const { task, onKeyPress } = this.props
 
-    render() {
-        return (
-            <div className={styles.myInputCase}>
-                <p className={styles.myInputCaseTaskName}>{this.props.task}</p>
-                <input
-                    type="text"
-                    placeholder="Write your task"
-                    className={styles.myInputCaseInput}
-                    onChange={this.setValue}
-                    value={this.state.inputValue}
-                    onKeyPress={this.props.onKeyPress}
-                />    
-            </div>
-        );
+            return (
+                <div className={styles.myInputCase}>
+                    <p className={styles.myInputCaseTaskName}>{task}</p>
+                    <input
+                        type="text"
+                        placeholder="Write your task"
+                        className={styles.myInputCaseInput}
+                        onChange={this.setValue}
+                        value={this.state.inputValue}
+                        onKeyPress={onKeyPress}
+                    />
+                </div>
+            );
+        }
     }
-}
 
 export default MyInput;
