@@ -1,0 +1,32 @@
+.overlay {
+
+    position: fixed;
+    right: 5%;
+    border: 10px solid #6e3bc2;
+
+    p {
+        color: #6e3bc2;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+    background-color: #313030;
+
+    &Close {
+        cursor: pointer;
+        font-size: 25px;
+        color: #6e3bc2;
+        position: absolute;
+        top: 0px;
+        right: 0;
+        padding: 5px;
+    }
+}

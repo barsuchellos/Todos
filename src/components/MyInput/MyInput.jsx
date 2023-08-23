@@ -4,10 +4,6 @@ import styles from './MyInput.module.scss'
 class MyInput extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            inputValue: '',
-        }
-
         this.setValue = this.setValue.bind(this);
     }
 
@@ -26,7 +22,7 @@ class MyInput extends Component {
                         placeholder="Write your task"
                         className={styles.myInputCaseInput}
                         onChange={this.setValue}
-                        value={this.state.inputValue}
+                        value={this.props.inputValue}
                         onKeyPress={onKeyPress}
                     />
                 </div>

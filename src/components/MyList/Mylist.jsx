@@ -15,7 +15,9 @@ class Mylist extends Component {
                 {list.map((el, index) =>
                     <div className={styles.listItemContainer}>
                         <li className={styles.listItem} key={index}>{el}</li>
-                        <MyButton name='Delete' addToDo={() => this.deleteItem(index)} key={index + 1} />
+                        <div>
+                            <MyButton name='Delete' addToDo={() => this.deleteItem(index)} key={index + 1} />
+                        </div>
                     </div>
                 )}
             </ul>
