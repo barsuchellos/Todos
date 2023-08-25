@@ -1,10 +1,12 @@
+import { Component } from 'react';
+
 import './styles/App.scss'
+
 import MyInput from './components/MyInput/MyInput';
 import MyButton from './components/MyButton/MyButton';
 import Mylist from './components/MyList/Mylist';
 import Modal from './components/Modal/Modal';
 
-import { Component } from 'react';
 
 
 class App extends Component {
@@ -16,9 +18,10 @@ class App extends Component {
       minLength: false,
       modal: false,
       listWarning: false,
+      showEditInputIndex: null,
+      setItem: '',
     }
   }
-
 
   handleInput = (event) => {
     this.setState({ inputValue: event })
@@ -45,13 +48,17 @@ class App extends Component {
     this.setState({ modal: false })
   }
 
+  setItem = (el) => {
+    this.setState({ setItem: el })
+  }
+
   addToDo = () => {
     if (this.state.inputValue.length > 5) {
       this.setState((prevState) => ({
         list: [...prevState.list, prevState.inputValue],
         inputValue: '',
         minLength: false,
-        listWarning: false
+        listWarning: false,
       }))
     } else {
       this.setState({ minLength: true })
@@ -69,15 +76,30 @@ class App extends Component {
     this.setState({ list: newList })
   }
 
-  render() {
+  editItem = (el) => {
+    this.setState({ showEditInputIndex: el })
+  }
 
+  changeList = (index, value) => {
+    const newList = [...this.state.list]
+    newList[index] = value
+    this.setState({ list: newList })
+  }
+
+  saveItem = (index, newValue) => {
+    const newList = [...this.state.list];
+    newList[index] = newValue;
+    this.setState({ list: newList, showEditInputIndex: null });
+  }
+
+  render() {
+    console.log(this.state.showEditInputIndex);
     const { list, inputValue, minLength, modal, listWarning } = this.state;
 
     return (
       <>
-        {
-          modal && <Modal deleteList={this.deleteList} closeModal={this.closeModal} />
-        }
+        {modal && <Modal deleteList={this.deleteList} closeModal={this.closeModal} />}
+
         <div className="App">
           <div className='container'>
             <MyInput
@@ -91,7 +113,14 @@ class App extends Component {
           </div>
           {listWarning && <p className='warning-input-length'>List is Empty</p>}
           {minLength && <p className='warning-input-length'>Write at least 5 words</p>}
-          <Mylist className='list' list={list} updateList={this.updateList}></Mylist>
+          <Mylist
+            className='list'
+            list={list}
+            updateList={this.updateList}
+            setItem={this.setItem}
+            editItem={this.editItem}
+            showEditInputIndex={this.state.showEditInputIndex}
+          />
         </div>
       </>
 
