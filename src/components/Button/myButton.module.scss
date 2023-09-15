@@ -1,0 +1,22 @@
+.myButton {
+    width: 70px;
+    height: 50px;
+    font-size: 20px;
+
+
+    margin-left: 10px;
+    border-radius: 0px;
+    border: 0px;
+    cursor: pointer;
+
+    color: #313030;
+    background-color: #8a4af3;
+
+    transition: background-color, border-radius 0.7s;
+
+    &:hover {
+        background-color: #6e3bc2;
+        border-radius: 10px;
+    }
+}
+

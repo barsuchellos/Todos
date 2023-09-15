@@ -2,8 +2,8 @@ import { Component } from 'react';
 
 import './styles/App.scss'
 
-import MyInput from './components/MyInput/MyInput';
-import MyButton from './components/MyButton/MyButton';
+import Input from './components/Input/Input';
+import Button from './components/Button/Button';
 import Mylist from './components/MyList/Mylist';
 import Modal from './components/Modal/Modal';
 
@@ -17,17 +17,35 @@ class App extends Component {
       list: [],
       minLength: false,
       modal: false,
-      listWarning: false,
       showEditInputIndex: null,
       setItem: '',
+      error: '',
     }
   }
 
+
+  componentDidMount() {
+    document.addEventListener('click', this.handleDocumentClick);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleDocumentClick);
+  }
+
+  handleDocumentClick = (event) => {
+    if (this.state.modal && !this.modalRef.contains(event.target)) {
+      this.onClose();
+    }
+  }
+
+  setModalRef = (element) => {
+    this.modalRef = element;
+  }
   handleInput = (event) => {
     this.setState({ inputValue: event })
   }
 
-  deleteList = () => {
+  onDelete = () => {
     this.setState({ list: [], modal: false })
   }
 
@@ -41,10 +59,10 @@ class App extends Component {
   }
 
   showWarning = () => {
-    this.setState({ listWarning: true })
+    this.setState({ error: 'List is Empty' })
   }
 
-  closeModal = () => {
+  onClose = () => {
     this.setState({ modal: false })
   }
 
@@ -57,11 +75,10 @@ class App extends Component {
       this.setState((prevState) => ({
         list: [...prevState.list, prevState.inputValue],
         inputValue: '',
-        minLength: false,
-        listWarning: false,
+        error: '',
       }))
     } else {
-      this.setState({ minLength: true })
+      this.setState({ error: 'Write at least 5 words' })
     }
 
   }
@@ -93,26 +110,32 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.showEditInputIndex);
-    const { list, inputValue, minLength, modal, listWarning } = this.state;
+    console.log(this.state.modal);
+    const { list, inputValue, modal, listWarning, error } = this.state;
 
     return (
       <>
-        {modal && <Modal deleteList={this.deleteList} closeModal={this.closeModal} />}
+        {modal &&
+          <Modal
+            onDelete={this.onDelete}
+            onClose={this.onClose}
+            setRef={this.setModalRef}
+          />
+        }
 
         <div className="App">
           <div className='container'>
-            <MyInput
+            <Input
               task='Task'
               setArr={this.handleInput}
               onKeyPress={this.enterPress}
               inputValue={inputValue}
+              placeholder="Write your task"
             />
-            <MyButton addToDo={this.addToDo} name='Add' />
-            <MyButton addToDo={this.showModal} name='Delete All' />
+            <Button onClick={this.addToDo} text='Add' />
+            <Button onClick={this.showModal} text='Delete All' />
           </div>
-          {listWarning && <p className='warning-input-length'>List is Empty</p>}
-          {minLength && <p className='warning-input-length'>Write at least 5 words</p>}
+          {error && <p className='input-warning'>{error}</p>}
           <Mylist
             className='list'
             list={list}
