@@ -13,7 +13,7 @@ class Modal extends Component {
             (
                 <div className={styles.overlay} ref={setRef}>
                     <div className={styles.modal}>
-                        <div>
+                        <div> 
                             <p>Are you sure?</p>
                             <span className={styles.modalClose} onClick={onClose}>X</span>
                         </div>

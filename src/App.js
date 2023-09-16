@@ -33,6 +33,7 @@ class App extends Component {
   }
 
   handleDocumentClick = (event) => {
+    console.log(this.modalRef);
     if (this.state.modal && !this.modalRef.contains(event.target)) {
       this.onClose();
     }
@@ -110,7 +111,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.modal);
+    //console.log(this.state.modal);
     const { list, inputValue, modal, listWarning, error } = this.state;
 
     return (
