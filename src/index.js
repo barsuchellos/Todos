@@ -4,6 +4,7 @@ import App from './App';
 import './styles/reset.scss'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const modalRoot = ReactDOM.createRoot(document.getElementById('modal-root'));
 root.render(
   <>
     <App />

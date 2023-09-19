@@ -1,3 +1,4 @@
+import React from 'react';
 import { Component } from 'react';
 
 import './styles/App.scss'
@@ -23,6 +24,7 @@ class App extends Component {
     }
   }
 
+  refModal = React.createRef();
 
   componentDidMount() {
     document.addEventListener('click', this.handleDocumentClick);
@@ -33,15 +35,18 @@ class App extends Component {
   }
 
   handleDocumentClick = (event) => {
-    console.log(this.modalRef);
-    if (this.state.modal && !this.modalRef.contains(event.target)) {
+    console.log(this.state.modal, '  eventTarget', event.target, '  ModalREf', this.refModal.current);
+
+    if (this.state.modal && !this.refModal.current.contains(event.target)) {
+      console.log("ONClose");
       this.onClose();
     }
   }
 
-  setModalRef = (element) => {
-    this.modalRef = element;
-  }
+  // setModalRef = (element) => {
+    // this.modalRef = element;
+  // }
+
   handleInput = (event) => {
     this.setState({ inputValue: event })
   }
@@ -50,7 +55,10 @@ class App extends Component {
     this.setState({ list: [], modal: false })
   }
 
-  showModal = () => {
+  showModal = (e) => {
+    console.log(e);
+    e.preventDefault()
+    e.stopPropagation();
     if (!this.state.list.length) {
       this.showWarning()
     } else {
@@ -120,7 +128,7 @@ class App extends Component {
           <Modal
             onDelete={this.onDelete}
             onClose={this.onClose}
-            setRef={this.setModalRef}
+            setRef={this.refModal}
           />
         }
 
