@@ -27,13 +27,13 @@ class Mylist extends Component {
 
     render() {
         
-        const { list, setItem, showEditInputIndex, editItem } = this.props;
+        const { list, setItem, showEditInputIndex } = this.props;
 
         return (
             <ul className={styles.list}>
                 {list.map((el, index) =>
                     <div className={styles.listItemContainer}>
-                        <li className={styles.listItem} key={index}>{el}</li>
+                        <li className={styles.listItem} key={index}>{`${index + 1}.${el}`}</li>
                         {showEditInputIndex === index &&
                             <EditAbleImput
                                 value={el}
@@ -44,7 +44,6 @@ class Mylist extends Component {
                             />}
                         <div>
                             <Button text='Delete' onClick={() => this.deleteItem(index)} key={index + 1} />
-                            <Button text='Edit' onClick={() => editItem(index)} key={index + 5} />
                         </div>
                     </div>
                 )}

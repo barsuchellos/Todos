@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Component } from 'react';
 
 import './styles/App.scss'
@@ -22,9 +22,13 @@ class App extends Component {
       setItem: '',
       error: '',
     }
+    this.refModal = useRef;
+    this.setModalRef = element => {
+      this.refModal = element;
+    }
   }
 
-  refModal = React.createRef();
+  //refModal = React.createRef();
 
   componentDidMount() {
     document.addEventListener('click', this.handleDocumentClick);
@@ -35,17 +39,13 @@ class App extends Component {
   }
 
   handleDocumentClick = (event) => {
-    console.log(this.state.modal, '  eventTarget', event.target, '  ModalREf', this.refModal.current);
+    console.log(this.state.modal, '  eventTarget', event.target, '  ModalREf', this.refModal);
 
-    if (this.state.modal && !this.refModal.current.contains(event.target)) {
+    if (this.state.modal && !this.refModal.contains(event.target)) {
       console.log("ONClose");
       this.onClose();
     }
   }
-
-  // setModalRef = (element) => {
-    // this.modalRef = element;
-  // }
 
   handleInput = (event) => {
     this.setState({ inputValue: event })
@@ -56,7 +56,6 @@ class App extends Component {
   }
 
   showModal = (e) => {
-    console.log(e);
     e.preventDefault()
     e.stopPropagation();
     if (!this.state.list.length) {
@@ -102,10 +101,6 @@ class App extends Component {
     this.setState({ list: newList })
   }
 
-  editItem = (el) => {
-    this.setState({ showEditInputIndex: el })
-  }
-
   changeList = (index, value) => {
     const newList = [...this.state.list]
     newList[index] = value
@@ -128,7 +123,7 @@ class App extends Component {
           <Modal
             onDelete={this.onDelete}
             onClose={this.onClose}
-            setRef={this.refModal}
+            setRef={this.setModalRef}
           />
         }
 
@@ -150,7 +145,6 @@ class App extends Component {
             list={list}
             updateList={this.updateList}
             setItem={this.setItem}
-            editItem={this.editItem}
             showEditInputIndex={this.state.showEditInputIndex}
           />
         </div>
